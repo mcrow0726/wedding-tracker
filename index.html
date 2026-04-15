@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Wedding · Mallory & Alex</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"DM Sans",sans-serif;background:#f7faf7;color:#1a2a1e;min-height:100vh}
+.hero{background:linear-gradient(160deg,#5a7a5c 0%,#7a9e7e 50%,#8ab58e 100%);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 70% 0%,rgba(232,212,158,0.2) 0%,transparent 55%),radial-gradient(ellipse at 15% 100%,rgba(232,180,180,0.15) 0%,transparent 50%);pointer-events:none}
+.hero-inner{position:relative;z-index:1}
+.hero-eyebrow{font-size:9px;font-weight:500;letter-spacing:5px;text-transform:uppercase;color:#e8d49e;margin-bottom:12px}
+.hero-title{font-family:"Cormorant Garamond",serif;font-size:42px;font-weight:300;color:#fdf8f0;line-height:1;margin-bottom:6px}
+.hero-title em{font-style:italic;color:#e8d49e}
+.hero-sub{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:14px;color:rgba(253,248,240,0.55);margin-top:6px}
+.stats-grid{background:#8ab58e}
+.stats-header{display:grid;grid-template-columns:90px 1fr 1fr 1fr;background:#6a9e6e}
+.stats-header-cell{padding:7px 4px;text-align:center;font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#e8d49e}
+.stats-header-cell:first-child{background:transparent}
+.stats-row{display:grid;grid-template-columns:90px 1fr 1fr 1fr;background:#f7faf7;border-bottom:1px solid #c8ddc8}
+.stats-row:last-child{border-bottom:none}
+.stats-row-label{padding:10px 10px;font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#6b7d6b;display:flex;align-items:center}
+.stats-cell{padding:10px 4px;text-align:center}
+.stats-num{font-family:"Cormorant Garamond",serif;font-size:24px;font-weight:300;line-height:1}
+.stats-num.invited{color:#5a7a5c}
+.stats-num.attending{color:#c8856e}
+.stats-num.pending{color:#7a9ec8}
+.tabs{display:flex;background:#edf5ee;border-bottom:1px solid #c8ddc8}
+.tab{flex:1;padding:12px 8px;text-align:center;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#6b7d6b;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab.active{color:#5a7a5c;border-bottom-color:#5a7a5c}
+.main{padding:16px;max-width:500px;margin:0 auto}
+.search-bar{display:flex;gap:8px;margin-bottom:12px}
+.search-input{flex:1;padding:10px 14px;border:1px solid #c8ddc8;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:13px;background:#fff;outline:none;color:#1a2a1e}
+.search-input:focus{border-color:#8ab58e}
+.add-btn{padding:10px 16px;background:#6a9e6e;color:#fff;border:none;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:11px;font-weight:500;letter-spacing:1px;cursor:pointer;white-space:nowrap}
+.filter-row{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.filter-row::-webkit-scrollbar{display:none}
+.filter-pill{flex-shrink:0;padding:5px 12px;border-radius:16px;border:1px solid #c8ddc8;background:transparent;font-family:"DM Sans",sans-serif;font-size:10px;color:#6b7d6b;cursor:pointer;white-space:nowrap;transition:all 0.15s}
+.filter-pill.active{background:#6a9e6e;border-color:#6a9e6e;color:#fff}
+.filter-pill.bride{border-color:#f2b8c6;background:#fef0f4;color:#c8556e}
+.filter-pill.groom{border-color:#b8c8e8;background:#f0f4fc;color:#4a6ea8}
+.section-header{font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#6b7d6b;margin:14px 0 8px;padding-bottom:6px;border-bottom:1px solid #e0ece0}
+.guest-card{background:#fff;border:1px solid #e0ece0;border-radius:12px;margin-bottom:10px;overflow:hidden}
+.guest-card.expanded{border-color:#e8c46e}
+.guest-card-head{padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-size:15px;font-weight:600;flex-shrink:0}
+.avatar.bride{background:#fef0f4;color:#c8556e}
+.avatar.groom{background:#f0f4fc;color:#4a6ea8}
+.guest-info{flex:1;min-width:0}
+.guest-name{font-size:13px;font-weight:500;color:#1a2a1e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rsvp-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
+.rsvp-badge{font-size:9px;font-weight:500;padding:2px 6px;border-radius:6px;flex-shrink:0}
+.rsvp-badge.yes{background:#e8f5e8;color:#3a6e3a}
+.rsvp-badge.no{background:#fce8e8;color:#c85050}
+.rsvp-badge.nr{background:#fef8e8;color:#a87e2a}
+.rsvp-badge.na{background:#f0f0ee;color:#888}
+.guest-count{font-family:"Cormorant Garamond",serif;font-size:20px;color:#e8c46e;flex-shrink:0}
+.chevron{font-size:10px;color:#c0c8c0;flex-shrink:0;transition:transform 0.2s}
+.chevron.open{transform:rotate(180deg)}
+.guest-expanded{padding:0 14px 14px;border-top:1px solid #f0f5f0}
+.rsvp-section{margin-top:10px}
+.rsvp-section-title{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#6b7d6b;margin-bottom:8px}
+.rsvp-options{display:flex;gap:5px}
+.rsvp-opt{flex:1;padding:7px 4px;border-radius:8px;border:1px solid #e0ece0;background:transparent;font-family:"DM Sans",sans-serif;font-size:10px;font-weight:500;cursor:pointer;text-align:center;transition:all 0.15s;color:#6b7d6b}
+.rsvp-opt.sel-yes{background:#3a6e3a;border-color:#3a6e3a;color:#fff}
+.rsvp-opt.sel-no{background:#c85050;border-color:#c85050;color:#fff}
+.rsvp-opt.sel-nr{background:#a87e2a;border-color:#a87e2a;color:#fff}
+.rsvp-opt.sel-na{background:#888;border-color:#888;color:#fff}
+.action-row{display:flex;gap:8px;margin-top:12px}
+.edit-btn{flex:1;padding:9px;border-radius:8px;background:#edf5ee;border:1px solid #c8ddc8;font-family:"DM Sans",sans-serif;font-size:11px;font-weight:500;color:#3a6e3a;cursor:pointer}
+.delete-btn{padding:9px 14px;border-radius:8px;background:#fce8e8;border:1px solid #f0c8c8;font-family:"DM Sans",sans-serif;font-size:11px;font-weight:500;color:#c85050;cursor:pointer}
+.modal-bg{position:fixed;inset:0;background:rgba(26,42,30,0.55);z-index:200;display:flex;align-items:flex-end;justify-content:center}
+.modal-bg.hidden{display:none}
+.modal{background:#fff;border-radius:20px 20px 0 0;padding:24px 20px 40px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto}
+.modal-title{font-family:"Cormorant Garamond",serif;font-size:24px;font-weight:400;color:#1a2a1e;margin-bottom:18px}
+.modal-field{margin-bottom:14px}
+.modal-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#6b7d6b;margin-bottom:6px;display:block}
+.modal-input{width:100%;padding:10px 14px;border:1px solid #c8ddc8;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:14px;color:#1a2a1e;background:#fff;outline:none}
+.modal-input:focus{border-color:#8ab58e}
+.modal-select{width:100%;padding:10px 14px;border:1px solid #c8ddc8;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:14px;color:#1a2a1e;background:#fff;outline:none}
+.modal-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.modal-actions{display:flex;gap:10px;margin-top:20px}
+.modal-save{flex:1;padding:14px;background:#6a9e6e;color:#fff;border:none;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
+.modal-cancel{padding:14px 20px;background:#edf5ee;border:1px solid #c8ddc8;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:12px;font-weight:500;color:#6b7d6b;cursor:pointer}
+.summary-card{background:#fff;border:1px solid #e0ece0;border-radius:12px;margin-bottom:12px;overflow:hidden}
+.summary-card-title{padding:12px 16px;font-family:"Cormorant Garamond",serif;font-size:18px;font-weight:500;background:linear-gradient(135deg,#edf5ee,#f7faf7);border-bottom:1px solid #e0ece0;color:#1a2a1e}
+.summary-body{padding:12px 16px}
+.summary-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #f5f8f5;font-size:13px}
+.summary-row:last-child{border-bottom:none}
+.summary-label{color:#6b7d6b;font-size:12px}
+.summary-val{font-family:"Cormorant Garamond",serif;font-size:22px}
+.save-status{padding:7px 20px;text-align:center;display:none}
+.save-status.show{display:block}
+.save-status.saving{background:#5a7a5c}
+.save-status.saved{background:#5a7a5c}
+.save-status.error{background:#c85050}
+.save-status span{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#e8d49e}
+</style>
+</head>
+<body>
+
+<div id="saveStatus" class="save-status"><span id="saveText"></span></div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">June 27, 2026</div>
+    <div class="hero-title">Mallory <em>&</em> Alex</div>
+    <div class="hero-sub">The View at Mount Adams · Cincinnati</div>
+  </div>
+</div>
+
+<div class="stats-grid">
+  <div class="stats-header">
+    <div class="stats-header-cell"></div>
+    <div class="stats-header-cell">Welcome</div>
+    <div class="stats-header-cell">Ceremony</div>
+    <div class="stats-header-cell">Reception</div>
+  </div>
+  <div class="stats-row">
+    <div class="stats-row-label">Invited</div>
+    <div class="stats-cell"><div class="stats-num invited" id="invW">—</div></div>
+    <div class="stats-cell"><div class="stats-num invited" id="invC">—</div></div>
+    <div class="stats-cell"><div class="stats-num invited" id="invR">—</div></div>
+  </div>
+  <div class="stats-row">
+    <div class="stats-row-label">Attending</div>
+    <div class="stats-cell"><div class="stats-num attending" id="attW">—</div></div>
+    <div class="stats-cell"><div class="stats-num attending" id="attC">—</div></div>
+    <div class="stats-cell"><div class="stats-num attending" id="attR">—</div></div>
+  </div>
+  <div class="stats-row">
+    <div class="stats-row-label">Pending</div>
+    <div class="stats-cell"><div class="stats-num pending" id="penW">—</div></div>
+    <div class="stats-cell"><div class="stats-num pending" id="penC">—</div></div>
+    <div class="stats-cell"><div class="stats-num pending" id="penR">—</div></div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" id="tabGuests" onclick="switchTab('guests')">Guest List</div>
+  <div class="tab" id="tabSummary" onclick="switchTab('summary')">Summary</div>
+</div>
+
+<div class="main">
+  <div id="guestsView">
+    <div class="search-bar">
+      <input class="search-input" id="searchInput" placeholder="Search guests…" oninput="renderGuests()">
+      <button class="add-btn" onclick="openModal()">+ Add</button>
+    </div>
+    <div class="filter-row" id="filterRow"></div>
+    <div id="guestList"></div>
+  </div>
+  <div id="summaryView" style="display:none">
+    <div id="summaryContent"></div>
+  </div>
+</div>
+
+<div class="modal-bg hidden" id="modalBg">
+  <div class="modal">
+    <div class="modal-title" id="modalTitle">Add Guest</div>
+    <div class="modal-field">
+      <label class="modal-label">Guest Name</label>
+      <input class="modal-input" id="mName" placeholder="Full name or family name">
+    </div>
+    <div class="modal-row">
+      <div class="modal-field">
+        <label class="modal-label">Side</label>
+        <select class="modal-select" id="mSide">
+          <option value="Bride">Bride</option>
+          <option value="Groom">Groom</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Guest Count</label>
+        <input class="modal-input" id="mCount" type="number" min="1" value="1">
+      </div>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Category</label>
+      <select class="modal-select" id="mCategory">
+        <option>Bride Family (Ceremony)</option>
+        <option>Bride Extended Family</option>
+        <option>Bride Friend (Ceremony)</option>
+        <option>Bride Friend</option>
+        <option>Bride Parents Friends</option>
+        <option>Groom Family (Ceremony)</option>
+        <option>Groom Extended Family</option>
+        <option>Groom Friend (Ceremony)</option>
+        <option>Groom Friend</option>
+        <option>Groom Parents Friends</option>
+      </select>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Events Invited</label>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+        <label style="display:flex;align-items:center;gap:10px;font-size:13px"><input type="checkbox" id="mWelcome" checked> Welcome Party</label>
+        <label style="display:flex;align-items:center;gap:10px;font-size:13px"><input type="checkbox" id="mCeremony" checked> Ceremony</label>
+        <label style="display:flex;align-items:center;gap:10px;font-size:13px"><input type="checkbox" id="mReception" checked> Reception</label>
+      </div>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">RSVP — Welcome Party</label>
+      <select class="modal-select" id="mRsvpW">
+        <option value="NOT RECEIVED">Not Received</option>
+        <option value="YES">Yes</option>
+        <option value="NO">No</option>
+        <option value="N/A">N/A</option>
+      </select>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">RSVP — Ceremony</label>
+      <select class="modal-select" id="mRsvpC">
+        <option value="NOT RECEIVED">Not Received</option>
+        <option value="YES">Yes</option>
+        <option value="NO">No</option>
+        <option value="N/A">N/A</option>
+      </select>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">RSVP — Reception</label>
+      <select class="modal-select" id="mRsvpR">
+        <option value="NOT RECEIVED">Not Received</option>
+        <option value="YES">Yes</option>
+        <option value="NO">No</option>
+        <option value="N/A">N/A</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+      <button class="modal-save" onclick="saveGuest()">Save Guest</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL='https://rnvlgayggelxmegrvoqa.supabase.co';
+const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJudmxnYXlnZ2VseG1lZ3J2b3FhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNjkxNTksImV4cCI6MjA5MTg0NTE1OX0.6qaHtBt7sbnqEZ5o-hZ1_Isl6ZS-XqnO5FYT01yvlEA';
+const SB={'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY};
+const DEFAULT_GUESTS=[{"id": 1, "name": "Allyson Newport", "side": "Bride", "category": "Bride Family (Ceremony)", "welcome": 1, "ceremony": 1, "reception": 1, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "YES", "rsvp_ceremony": "YES", "rsvp_reception": "YES"}, {"id": 2, "name": "Brandon and Haley Ringwald & family", "side": "Bride", "category": "Bride Family (Ceremony)", "welcome": 4, "ceremony": 4, "reception": 4, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "NOT RECEIVED", "rsvp_reception": "NOT RECEIVED"}, {"id": 3, "name": "David and Angela Crow", "side": "Bride", "category": "Bride Family (Ceremony)", "welcome": 2, "ceremony": 2, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "YES", "rsvp_ceremony": "YES", "rsvp_reception": "YES"}, {"id": 4, "name": "Tyler and Kelsey Brosey & family", "side": "Bride", "category": "Bride Family (Ceremony)", "welcome": 5, "ceremony": 5, "reception": 5, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "YES", "rsvp_ceremony": "YES", "rsvp_reception": "YES"}, {"id": 5, "name": "Dustin Spina Clossen & Jamison Lambert", "side": "Bride", "category": "Bride Friend (Ceremony)", "welcome": 2, "ceremony": 2, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "YES", "rsvp_ceremony": "YES", "rsvp_reception": "YES"}, {"id": 6, "name": "Brock Mobley", "side": "Bride", "category": "Bride Extended Family", "welcome": 1, "ceremony": 0, "reception": 1, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "YES", "rsvp_ceremony": "N/A", "rsvp_reception": "YES"}, {"id": 7, "name": "Glenn and Jenifer Randolph", "side": "Bride", "category": "Bride Extended Family", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 8, "name": "Jeanne Mobley", "side": "Bride", "category": "Bride Extended Family", "welcome": 1, "ceremony": 0, "reception": 1, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 9, "name": "Josiah and Kiersten Oldham", "side": "Bride", "category": "Bride Extended Family", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 10, "name": "Max Mobley", "side": "Bride", "category": "Bride Extended Family", "welcome": 1, "ceremony": 0, "reception": 1, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 11, "name": "Nick and Lauren Stahl", "side": "Bride", "category": "Bride Extended Family", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "YES", "rsvp_ceremony": "N/A", "rsvp_reception": "YES"}, {"id": 12, "name": "Sharon Mobley", "side": "Bride", "category": "Bride Extended Family", "welcome": 1, "ceremony": 0, "reception": 1, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 13, "name": "Tim and Rachel Michalak", "side": "Bride", "category": "Bride Extended Family", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 14, "name": "Aaron and Jennifer Crummley", "side": "Bride", "category": "Bride Friend", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 15, "name": "Abraham and Kalie Naas", "side": "Bride", "category": "Bride Friend", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "YES", "rsvp_ceremony": "N/A", "rsvp_reception": "YES"}, {"id": 16, "name": "Andy and Ann Buennagel", "side": "Bride", "category": "Bride Friend", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 17, "name": "Joe Whiting and Amirah Saim", "side": "Bride", "category": "Bride Friend", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 18, "name": "Bill and Micki Carr", "side": "Bride", "category": "Bride Parents Friends", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NO", "rsvp_ceremony": "N/A", "rsvp_reception": "YES"}, {"id": 19, "name": "Brian Smith (Bear)", "side": "Bride", "category": "Bride Parents Friends", "welcome": 1, "ceremony": 0, "reception": 1, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 20, "name": "Dennis Fruitt and Brian Foss", "side": "Bride", "category": "Bride Parents Friends", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 21, "name": "Dennis Hoagland", "side": "Bride", "category": "Bride Parents Friends", "welcome": 1, "ceremony": 0, "reception": 1, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 22, "name": "Gigi Trapp", "side": "Bride", "category": "Bride Parents Friends", "welcome": 1, "ceremony": 0, "reception": 1, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 23, "name": "John Wolff and Nancy Thorne", "side": "Bride", "category": "Bride Parents Friends", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 24, "name": "Marcia Sherwood", "side": "Bride", "category": "Bride Parents Friends", "welcome": 1, "ceremony": 0, "reception": 1, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 25, "name": "Mark Evans", "side": "Bride", "category": "Bride Parents Friends", "welcome": 1, "ceremony": 0, "reception": 1, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "YES", "rsvp_ceremony": "N/A", "rsvp_reception": "YES"}, {"id": 26, "name": "Maureen Ruddy", "side": "Bride", "category": "Bride Parents Friends", "welcome": 1, "ceremony": 0, "reception": 1, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 27, "name": "Michael Schuh and Kim Dahl", "side": "Bride", "category": "Bride Parents Friends", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 28, "name": "Mike and Stephanie Fabritius", "side": "Bride", "category": "Bride Parents Friends", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "YES", "rsvp_ceremony": "N/A", "rsvp_reception": "YES"}, {"id": 29, "name": "Mike and Sue Seaton", "side": "Bride", "category": "Bride Parents Friends", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 30, "name": "Paul and Harshi Chahal", "side": "Bride", "category": "Bride Parents Friends", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NO", "rsvp_ceremony": "N/A", "rsvp_reception": "YES"}, {"id": 31, "name": "Roger and Beth Browning", "side": "Bride", "category": "Bride Parents Friends", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 32, "name": "Ben and Amanda Miller & family", "side": "Groom", "category": "Groom Family (Ceremony)", "welcome": 4, "ceremony": 4, "reception": 4, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "YES", "rsvp_ceremony": "YES", "rsvp_reception": "YES"}, {"id": 33, "name": "Bryan and Becky Kelly", "side": "Groom", "category": "Groom Family (Ceremony)", "welcome": 2, "ceremony": 2, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "NOT RECEIVED", "rsvp_reception": "NOT RECEIVED"}, {"id": 34, "name": "Charlie and Kris Miller", "side": "Groom", "category": "Groom Family (Ceremony)", "welcome": 2, "ceremony": 2, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "YES", "rsvp_ceremony": "YES", "rsvp_reception": "YES"}, {"id": 35, "name": "Elliott and Kelsey Miller & family", "side": "Groom", "category": "Groom Family (Ceremony)", "welcome": 4, "ceremony": 4, "reception": 4, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "YES", "rsvp_ceremony": "YES", "rsvp_reception": "YES"}, {"id": 36, "name": "Joe Carolin and Amy Heisel & Larry", "side": "Groom", "category": "Groom Family (Ceremony)", "welcome": 3, "ceremony": 3, "reception": 3, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "YES", "rsvp_ceremony": "YES", "rsvp_reception": "YES"}, {"id": 37, "name": "Paul and Nancy Heisel", "side": "Groom", "category": "Groom Family (Ceremony)", "welcome": 2, "ceremony": 2, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "YES", "rsvp_ceremony": "YES", "rsvp_reception": "YES"}, {"id": 38, "name": "Jared and Joanne Frisk", "side": "Groom", "category": "Groom Friend (Ceremony)", "welcome": 2, "ceremony": 2, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "NOT RECEIVED", "rsvp_reception": "NOT RECEIVED"}, {"id": 39, "name": "Jeff and Lori Neises", "side": "Groom", "category": "Groom Friend (Ceremony)", "welcome": 2, "ceremony": 2, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "NOT RECEIVED", "rsvp_reception": "NOT RECEIVED"}, {"id": 40, "name": "Pat Neimeier and Ashley Truckor", "side": "Groom", "category": "Groom Friend (Ceremony)", "welcome": 2, "ceremony": 2, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "NOT RECEIVED", "rsvp_reception": "NOT RECEIVED"}, {"id": 41, "name": "Aaron Heisel", "side": "Groom", "category": "Groom Extended Family", "welcome": 1, "ceremony": 0, "reception": 1, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 42, "name": "Alex Granger and Pam Poland", "side": "Groom", "category": "Groom Extended Family", "welcome": 0, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 43, "name": "Billy and Ashley Villines", "side": "Groom", "category": "Groom Extended Family", "welcome": 0, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 44, "name": "Chris and Emily Chaney", "side": "Groom", "category": "Groom Extended Family", "welcome": 0, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "YES"}, {"id": 45, "name": "Chris and Leah Grande", "side": "Groom", "category": "Groom Extended Family", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "YES", "rsvp_ceremony": "N/A", "rsvp_reception": "YES"}, {"id": 46, "name": "Dan and Julie Heisel", "side": "Groom", "category": "Groom Extended Family", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 47, "name": "David and Paige Heisel", "side": "Groom", "category": "Groom Extended Family", "welcome": 0, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 48, "name": "Dick Miller", "side": "Groom", "category": "Groom Extended Family", "welcome": 1, "ceremony": 0, "reception": 1, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 49, "name": "Eric and Kelley Kelly", "side": "Groom", "category": "Groom Extended Family", "welcome": 0, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 50, "name": "Jerry and Jenni Poland", "side": "Groom", "category": "Groom Extended Family", "welcome": 0, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "YES"}, {"id": 51, "name": "Jimmy and Maureen McMahon", "side": "Groom", "category": "Groom Extended Family", "welcome": 0, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 52, "name": "Ken and Debi Miller", "side": "Groom", "category": "Groom Extended Family", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "YES", "rsvp_ceremony": "N/A", "rsvp_reception": "YES"}, {"id": 53, "name": "Kyle and Kaitlin Bertke", "side": "Groom", "category": "Groom Extended Family", "welcome": 0, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "YES"}, {"id": 54, "name": "Scot and Angie Heisel", "side": "Groom", "category": "Groom Extended Family", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 55, "name": "Shane and Paula Owens", "side": "Groom", "category": "Groom Extended Family", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 56, "name": "Brandon and Angela Seng", "side": "Groom", "category": "Groom Friend", "welcome": 0, "ceremony": 0, "reception": 2, "priority": "Invite", "std": false, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 57, "name": "Chris Marcho and Sophie Robinson", "side": "Groom", "category": "Groom Friend", "welcome": 0, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "YES"}, {"id": 58, "name": "Daren and Samantha Undercuffler", "side": "Groom", "category": "Groom Friend", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 59, "name": "Don Sumner and Becky Stratton", "side": "Groom", "category": "Groom Friend", "welcome": 0, "ceremony": 0, "reception": 2, "priority": "Invite", "std": false, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "YES"}, {"id": 60, "name": "Ryne and Whitney Minor", "side": "Groom", "category": "Groom Friend", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 61, "name": "Steve and Mina Watkins", "side": "Groom", "category": "Groom Friend", "welcome": 2, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "NOT RECEIVED", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 62, "name": "Tag and Brittany Gregory", "side": "Groom", "category": "Groom Friend", "welcome": 0, "ceremony": 0, "reception": 2, "priority": "Invite", "std": false, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 63, "name": "David and Leah Cook", "side": "Groom", "category": "Groom Friend", "welcome": 0, "ceremony": 0, "reception": 2, "priority": "Invite", "std": false, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 64, "name": "Connor Berding", "side": "Groom", "category": "Groom Friend", "welcome": 0, "ceremony": 0, "reception": 1, "priority": "Invite", "std": false, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 65, "name": "Dennis and Laura Cook", "side": "Groom", "category": "Groom Parents Friends", "welcome": 0, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "YES"}, {"id": 66, "name": "Gary and Cindy Thomas", "side": "Groom", "category": "Groom Parents Friends", "welcome": 0, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "YES"}, {"id": 67, "name": "Glenn and Kelly Schneider", "side": "Groom", "category": "Groom Parents Friends", "welcome": 0, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "YES"}, {"id": 68, "name": "Ken and Donna Merkl", "side": "Groom", "category": "Groom Parents Friends", "welcome": 0, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}, {"id": 69, "name": "Paul and Connie Volker", "side": "Groom", "category": "Groom Parents Friends", "welcome": 0, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "YES"}, {"id": 70, "name": "Tim and Julie Ryan", "side": "Groom", "category": "Groom Parents Friends", "welcome": 0, "ceremony": 0, "reception": 2, "priority": "Invite", "std": true, "invite": true, "rsvp_welcome": "N/A", "rsvp_ceremony": "N/A", "rsvp_reception": "NOT RECEIVED"}];
+
+let guests=[],expandedId=null,editingId=null,activeFilter='All',saveTimer=null;
+
+function showStatus(msg,type){
+  const el=document.getElementById('saveStatus'),tx=document.getElementById('saveText');
+  el.className='save-status show '+type;
+  tx.textContent=msg;
+  if(type==='saved')setTimeout(()=>el.className='save-status',2000);
+}
+
+async function loadData(){
+  try{
+    const r=await fetch(SUPABASE_URL+'/rest/v1/wedding?select=data&limit=1',{headers:SB});
+    const rows=await r.json();
+    if(rows&&rows[0]&&rows[0].data){
+      const parsed=typeof rows[0].data==='string'?JSON.parse(rows[0].data):rows[0].data;
+      if(parsed&&parsed.guests&&parsed.guests.length>0){guests=parsed.guests;return;}
+    }
+  }catch(e){console.error(e)}
+  guests=DEFAULT_GUESTS.map(g=>({...g}));
+  scheduleSave();
+}
+
+function scheduleSave(){
+  showStatus('Saving…','saving');
+  if(saveTimer)clearTimeout(saveTimer);
+  saveTimer=setTimeout(async()=>{
+    try{
+      const r=await fetch(SUPABASE_URL+'/rest/v1/wedding?id=eq.1',{
+        method:'PATCH',
+        headers:{...SB,'Prefer':'return=minimal'},
+        body:JSON.stringify({data:JSON.stringify({guests})})
+      });
+      if(r.ok||r.status===204)showStatus('✓ Saved','saved');
+      else throw new Error(r.status);
+    }catch(e){showStatus('⚠ Save failed','error');console.error(e);}
+  },800);
+}
+
+function switchTab(tab){
+  document.getElementById('guestsView').style.display=tab==='guests'?'':'none';
+  document.getElementById('summaryView').style.display=tab==='summary'?'':'none';
+  document.getElementById('tabGuests').className='tab'+(tab==='guests'?' active':'');
+  document.getElementById('tabSummary').className='tab'+(tab==='summary'?' active':'');
+  if(tab==='summary')renderSummary();
+}
+
+function rsvpClass(v){return v==='YES'?'yes':v==='NO'?'no':v==='N/A'?'na':'nr';}
+function rsvpLabel(v){return v==='YES'?'Yes':v==='NO'?'No':v==='N/A'?'N/A':'Pending';}
+function getInitial(name){return name.trim()[0].toUpperCase();}
+
+function updateStats(){
+  const ev=['welcome','ceremony','reception'];
+  const rf=['rsvp_welcome','rsvp_ceremony','rsvp_reception'];
+  const ids=[['invW','invC','invR'],['attW','attC','attR'],['penW','penC','penR']];
+  ev.forEach((e,i)=>{
+    const inv=guests.reduce((s,g)=>s+(g[e]||0),0);
+    const att=guests.filter(g=>g[rf[i]]==='YES').reduce((s,g)=>s+(g[e]||0),0);
+    const pen=guests.filter(g=>g[rf[i]]==='NOT RECEIVED').reduce((s,g)=>s+(g[e]||0),0);
+    document.getElementById(ids[0][i]).textContent=inv;
+    document.getElementById(ids[1][i]).textContent=att;
+    document.getElementById(ids[2][i]).textContent=pen;
+  });
+}
+
+function renderFilters(){
+  const filters=['All','Bride','Groom','Yes','No','Pending'];
+  document.getElementById('filterRow').innerHTML=filters.map(f=>{
+    let cls='filter-pill'+(activeFilter===f?' active':'');
+    if(f==='Bride'&&activeFilter!=='Bride')cls+=' bride';
+    if(f==='Groom'&&activeFilter!=='Groom')cls+=' groom';
+    return `<button class="${cls}" onclick="setFilter('${f}')">${f}</button>`;
+  }).join('');
+}
+
+function setFilter(f){activeFilter=f;renderFilters();renderGuests();}
+
+function renderGuests(){
+  const search=document.getElementById('searchInput').value.toLowerCase();
+  let filtered=guests.filter(g=>{
+    if(search&&!g.name.toLowerCase().includes(search))return false;
+    if(activeFilter==='Bride')return g.side==='Bride';
+    if(activeFilter==='Groom')return g.side==='Groom';
+    if(activeFilter==='Yes')return g.rsvp_reception==='YES';
+    if(activeFilter==='No')return g.rsvp_reception==='NO';
+    if(activeFilter==='Pending')return g.rsvp_reception==='NOT RECEIVED';
+    return true;
+  });
+
+  const groups={};
+  filtered.forEach(g=>{if(!groups[g.category])groups[g.category]=[];groups[g.category].push(g);});
+
+  let html='';
+  Object.entries(groups).sort().forEach(([cat,grp])=>{
+    html+=`<div class="section-header">${cat} <span style="color:#e8c46e">(${grp.length})</span></div>`;
+    grp.forEach(g=>{
+      const isExp=expandedId===g.id;
+      const side=g.side==='Bride'?'bride':'groom';
+      html+=`<div class="guest-card${isExp?' expanded':''}">
+        <div class="guest-card-head" onclick="toggleExpand(${g.id})">
+          <div class="avatar ${side}">${getInitial(g.name)}</div>
+          <div class="guest-info">
+            <div class="guest-name">${g.name}</div>
+            <div class="rsvp-row">
+              <span class="rsvp-badge ${rsvpClass(g.rsvp_welcome)}">W: ${rsvpLabel(g.rsvp_welcome)}</span>
+              <span class="rsvp-badge ${rsvpClass(g.rsvp_ceremony)}">C: ${rsvpLabel(g.rsvp_ceremony)}</span>
+              <span class="rsvp-badge ${rsvpClass(g.rsvp_reception)}">R: ${rsvpLabel(g.rsvp_reception)}</span>
+            </div>
+          </div>
+          <div class="guest-count">${g.reception||0}</div>
+          <div class="chevron${isExp?' open':''}">▼</div>
+        </div>
+        ${isExp?`<div class="guest-expanded">
+          ${['welcome','ceremony','reception'].map((ev,i)=>{
+            const rf=['rsvp_welcome','rsvp_ceremony','rsvp_reception'][i];
+            const lbl=['Welcome Party','Ceremony','Reception'][i];
+            return `<div class="rsvp-section${i>0?' style=\"margin-top:10px\"':''}">
+              <div class="rsvp-section-title">${lbl} RSVP</div>
+              <div class="rsvp-options">
+                ${['YES','NO','NOT RECEIVED','N/A'].map(v=>
+                  `<button class="rsvp-opt${g[rf]===v?' sel-'+rsvpClass(v):''}" onclick="updateRsvp(${g.id},'${rf}','${v}')">${rsvpLabel(v)}</button>`
+                ).join('')}
+              </div>
+            </div>`;
+          }).join('')}
+          <div class="action-row">
+            <button class="edit-btn" onclick="openModal(${g.id})">✏️ Edit</button>
+            <button class="delete-btn" onclick="deleteGuest(${g.id})">Remove</button>
+          </div>
+        </div>`:''}
+      </div>`;
+    });
+  });
+
+  if(!html)html=`<div style="text-align:center;padding:40px;color:#6b7d6b;font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic">No guests found</div>`;
+  document.getElementById('guestList').innerHTML=html;
+  updateStats();
+}
+
+function toggleExpand(id){
+  const sy=window.scrollY;
+  expandedId=expandedId===id?null:id;
+  renderGuests();
+  window.scrollTo(0,sy);
+}
+
+function updateRsvp(id,field,val){
+  const sy=window.scrollY;
+  const g=guests.find(g=>g.id===id);
+  if(g){g[field]=val;scheduleSave();}
+  renderGuests();
+  window.scrollTo(0,sy);
+}
+
+function deleteGuest(id){
+  if(!confirm('Remove this guest?'))return;
+  guests=guests.filter(g=>g.id!==id);
+  expandedId=null;
+  scheduleSave();
+  renderGuests();
+}
+
+function openModal(id){
+  editingId=id||null;
+  document.getElementById('modalBg').classList.remove('hidden');
+  if(id){
+    const g=guests.find(g=>g.id===id);
+    document.getElementById('modalTitle').textContent='Edit Guest';
+    document.getElementById('mName').value=g.name;
+    document.getElementById('mSide').value=g.side;
+    document.getElementById('mCount').value=g.reception||1;
+    document.getElementById('mCategory').value=g.category;
+    document.getElementById('mWelcome').checked=g.welcome>0;
+    document.getElementById('mCeremony').checked=g.ceremony>0;
+    document.getElementById('mReception').checked=g.reception>0;
+    document.getElementById('mRsvpW').value=g.rsvp_welcome;
+    document.getElementById('mRsvpC').value=g.rsvp_ceremony;
+    document.getElementById('mRsvpR').value=g.rsvp_reception;
+  }else{
+    document.getElementById('modalTitle').textContent='Add Guest';
+    document.getElementById('mName').value='';
+    document.getElementById('mSide').value='Bride';
+    document.getElementById('mCount').value=1;
+    document.getElementById('mWelcome').checked=true;
+    document.getElementById('mCeremony').checked=true;
+    document.getElementById('mReception').checked=true;
+    document.getElementById('mRsvpW').value='NOT RECEIVED';
+    document.getElementById('mRsvpC').value='NOT RECEIVED';
+    document.getElementById('mRsvpR').value='NOT RECEIVED';
+  }
+}
+
+function closeModal(){document.getElementById('modalBg').classList.add('hidden');editingId=null;}
+
+function saveGuest(){
+  const name=document.getElementById('mName').value.trim();
+  if(!name){alert('Please enter a name');return;}
+  const count=parseInt(document.getElementById('mCount').value)||1;
+  const data={
+    name,side:document.getElementById('mSide').value,
+    category:document.getElementById('mCategory').value,
+    welcome:document.getElementById('mWelcome').checked?count:0,
+    ceremony:document.getElementById('mCeremony').checked?count:0,
+    reception:document.getElementById('mReception').checked?count:0,
+    rsvp_welcome:document.getElementById('mRsvpW').value,
+    rsvp_ceremony:document.getElementById('mRsvpC').value,
+    rsvp_reception:document.getElementById('mRsvpR').value,
+    priority:'Invite',std:true,invite:true
+  };
+  if(editingId){
+    const idx=guests.findIndex(g=>g.id===editingId);
+    guests[idx]={...guests[idx],...data};
+  }else{
+    data.id=Date.now();
+    guests.push(data);
+  }
+  closeModal();scheduleSave();renderGuests();
+}
+
+function renderSummary(){
+  const evs=['welcome','ceremony','reception'];
+  const labs=['Welcome Party','Ceremony','Reception'];
+  const rfs=['rsvp_welcome','rsvp_ceremony','rsvp_reception'];
+  let html='';
+  html+=`<div class="summary-card"><div class="summary-card-title">Overall</div><div class="summary-body">`;
+  evs.forEach((ev,i)=>{
+    const inv=guests.reduce((s,g)=>s+(g[ev]||0),0);
+    const yes=guests.filter(g=>g[rfs[i]]==='YES').reduce((s,g)=>s+(g[ev]||0),0);
+    const no=guests.filter(g=>g[rfs[i]]==='NO').reduce((s,g)=>s+(g[ev]||0),0);
+    const pen=guests.filter(g=>g[rfs[i]]==='NOT RECEIVED').reduce((s,g)=>s+(g[ev]||0),0);
+    html+=`<div class="summary-row"><span class="summary-label">${labs[i]} — Invited</span><span class="summary-val" style="color:#5a7a5c">${inv}</span></div>`;
+    html+=`<div class="summary-row"><span class="summary-label">${labs[i]} — Attending</span><span class="summary-val" style="color:#3a6e3a">${yes}</span></div>`;
+    html+=`<div class="summary-row"><span class="summary-label">${labs[i]} — Declined</span><span class="summary-val" style="color:#c85050">${no}</span></div>`;
+    html+=`<div class="summary-row"><span class="summary-label">${labs[i]} — Pending</span><span class="summary-val" style="color:#a87e2a">${pen}</span></div>`;
+  });
+  html+='</div></div>';
+  ['Bride','Groom'].forEach(side=>{
+    const sg=guests.filter(g=>g.side===side);
+    html+=`<div class="summary-card"><div class="summary-card-title">${side}'s Side</div><div class="summary-body">`;
+    evs.forEach((ev,i)=>{
+      const inv=sg.reduce((s,g)=>s+(g[ev]||0),0);
+      const yes=sg.filter(g=>g[rfs[i]]==='YES').reduce((s,g)=>s+(g[ev]||0),0);
+      html+=`<div class="summary-row"><span class="summary-label">${labs[i]}</span><span class="summary-val" style="color:#5a7a5c">${yes} / ${inv}</span></div>`;
+    });
+    html+='</div></div>';
+  });
+  document.getElementById('summaryContent').innerHTML=html;
+}
+
+async function init(){
+  await loadData();
+  renderFilters();
+  renderGuests();
+}
+init();
+</script>
+</body>
+</html>
