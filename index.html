@@ -3,114 +3,287 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Wedding · Mallory & Alex</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Crow Miller Wedding</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:"DM Sans",sans-serif;background:#f7faf7;color:#1a2a1e;min-height:100vh}
-.hero{background:linear-gradient(160deg,#5a7a5c 0%,#7a9e7e 50%,#8ab58e 100%);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 70% 0%,rgba(232,212,158,0.2) 0%,transparent 55%),radial-gradient(ellipse at 15% 100%,rgba(232,180,180,0.15) 0%,transparent 50%);pointer-events:none}
-.hero-inner{position:relative;z-index:1}
-.hero-eyebrow{font-size:9px;font-weight:500;letter-spacing:5px;text-transform:uppercase;color:#e8d49e;margin-bottom:12px}
-.hero-title{font-family:"Cormorant Garamond",serif;font-size:42px;font-weight:300;color:#fdf8f0;line-height:1;margin-bottom:6px}
-.hero-title em{font-style:italic;color:#e8d49e}
-.hero-sub{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:14px;color:rgba(253,248,240,0.55);margin-top:6px}
-.stats-grid{background:#8ab58e}
-.stats-header{display:grid;grid-template-columns:90px 1fr 1fr 1fr;background:#6a9e6e}
-.stats-header-cell{padding:7px 4px;text-align:center;font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#e8d49e}
-.stats-header-cell:first-child{background:transparent}
-.stats-row{display:grid;grid-template-columns:90px 1fr 1fr 1fr;background:#f7faf7;border-bottom:1px solid #c8ddc8}
+body{font-family:"DM Sans",sans-serif;background:#fffdf8;color:#2a1f0a;min-height:100vh}
+
+/* HERO */
+.hero{background:linear-gradient(160deg,#f9f0e8 0%,#fdf5e8 50%,#fef8f0 100%);padding:0 0 0 0;text-align:center;position:relative;overflow:hidden}
+
+/* FLORAL SVG top */
+.floral-top{width:100%;display:block}
+.hero-content{padding:8px 24px 32px;position:relative;z-index:2}
+.hero-eyebrow{font-size:10px;font-weight:500;letter-spacing:5px;text-transform:uppercase;color:#c8a84e;margin-bottom:12px}
+.hero-title{font-family:"Cormorant Garamond",serif;font-size:52px;font-weight:300;color:#2a1f0a;line-height:1;margin-bottom:8px}
+.hero-title em{font-style:italic;color:#c8a84e}
+.hero-sub{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:16px;color:rgba(42,31,10,0.5);margin-top:4px}
+.countdowns{display:flex;justify-content:space-between;align-items:center;margin-top:20px;gap:12px}
+.countdown-block{flex:1;background:rgba(255,255,255,0.6);border:1px solid rgba(200,168,78,0.3);border-radius:12px;padding:12px 10px;text-align:center}
+.countdown-num{font-family:"Cormorant Garamond",serif;font-size:38px;font-weight:300;color:#2a1f0a;line-height:1}
+.countdown-unit{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#c8a84e;margin-top:2px}
+.countdown-label{font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#8a7a5a;margin-bottom:6px}
+
+/* STATS */
+.stats-grid{background:#f5ede0;border-top:1px solid #e8d8c0;border-bottom:1px solid #e8d8c0}
+.stats-header{display:grid;grid-template-columns:90px 1fr 1fr 1fr;background:linear-gradient(135deg,#e8c87a,#d4a84e)}
+.stats-header-cell{padding:7px 4px;text-align:center;font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#2a1f0a}
+.stats-row{display:grid;grid-template-columns:90px 1fr 1fr 1fr;background:#fffdf8;border-bottom:1px solid #f0e4cc}
 .stats-row:last-child{border-bottom:none}
-.stats-row-label{padding:10px 10px;font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#6b7d6b;display:flex;align-items:center}
+.stats-row-label{padding:10px 10px;font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#8a7a5a;display:flex;align-items:center}
 .stats-cell{padding:10px 4px;text-align:center}
 .stats-num{font-family:"Cormorant Garamond",serif;font-size:24px;font-weight:300;line-height:1}
-.stats-num.invited{color:#5a7a5c}
-.stats-num.attending{color:#c8856e}
-.stats-num.pending{color:#7a9ec8}
-.tabs{display:flex;background:#edf5ee;border-bottom:1px solid #c8ddc8}
-.tab{flex:1;padding:12px 8px;text-align:center;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#6b7d6b;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
-.tab.active{color:#5a7a5c;border-bottom-color:#5a7a5c}
+.n-invited{color:#5a8a5c}
+.n-attending{color:#c87860}
+.n-pending{color:#7a8ac8}
+
+/* TABS */
+.tabs{display:flex;background:#fdf8f0;border-bottom:2px solid #e8d8c0}
+.tab{flex:1;padding:12px 8px;text-align:center;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#8a7a5a;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.2s}
+.tab.active{color:#c8a84e;border-bottom-color:#c8a84e}
+
+/* MAIN */
 .main{padding:16px;max-width:500px;margin:0 auto}
 .search-bar{display:flex;gap:8px;margin-bottom:12px}
-.search-input{flex:1;padding:10px 14px;border:1px solid #c8ddc8;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:13px;background:#fff;outline:none;color:#1a2a1e}
-.search-input:focus{border-color:#8ab58e}
-.add-btn{padding:10px 16px;background:#6a9e6e;color:#fff;border:none;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:11px;font-weight:500;letter-spacing:1px;cursor:pointer;white-space:nowrap}
+.search-input{flex:1;padding:10px 14px;border:1px solid #e8d8c0;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:13px;background:#fff;outline:none;color:#2a1f0a}
+.search-input:focus{border-color:#c8a84e}
+.add-btn{padding:10px 16px;background:linear-gradient(135deg,#c8a84e,#e8c87a);color:#2a1f0a;border:none;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:11px;font-weight:500;letter-spacing:1px;cursor:pointer;white-space:nowrap}
 .filter-row{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
 .filter-row::-webkit-scrollbar{display:none}
-.filter-pill{flex-shrink:0;padding:5px 12px;border-radius:16px;border:1px solid #c8ddc8;background:transparent;font-family:"DM Sans",sans-serif;font-size:10px;color:#6b7d6b;cursor:pointer;white-space:nowrap;transition:all 0.15s}
-.filter-pill.active{background:#6a9e6e;border-color:#6a9e6e;color:#fff}
-.filter-pill.bride{border-color:#f2b8c6;background:#fef0f4;color:#c8556e}
-.filter-pill.groom{border-color:#b8c8e8;background:#f0f4fc;color:#4a6ea8}
-.section-header{font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#6b7d6b;margin:14px 0 8px;padding-bottom:6px;border-bottom:1px solid #e0ece0}
-.guest-card{background:#fff;border:1px solid #e0ece0;border-radius:12px;margin-bottom:10px;overflow:hidden}
-.guest-card.expanded{border-color:#e8c46e}
+.filter-pill{flex-shrink:0;padding:5px 12px;border-radius:16px;border:1px solid #e8d8c0;background:transparent;font-family:"DM Sans",sans-serif;font-size:10px;color:#8a7a5a;cursor:pointer;white-space:nowrap;transition:all 0.15s}
+.filter-pill.active{background:linear-gradient(135deg,#c8a84e,#e8c87a);border-color:#c8a84e;color:#2a1f0a;font-weight:500}
+.filter-pill.bride-pill{border-color:#f4b8cc;background:#fef0f4;color:#c8507a}
+.filter-pill.groom-pill{border-color:#b8d0f4;background:#f0f4fe;color:#507ac8}
+
+/* SECTION HEADERS */
+.section-header{font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#8a7a5a;margin:14px 0 8px;padding-bottom:6px;border-bottom:1px solid #f0e4cc;display:flex;align-items:center;gap:8px}
+.section-header::before{content:"✿";color:#e8a878;font-size:12px}
+
+/* GUEST CARDS */
+.guest-card{background:#fff;border:1px solid #f0e4cc;border-radius:14px;margin-bottom:10px;overflow:hidden;transition:border-color 0.2s}
+.guest-card.expanded{border-color:#c8a84e;box-shadow:0 2px 12px rgba(200,168,78,0.15)}
 .guest-card-head{padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:pointer}
-.avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-size:15px;font-weight:600;flex-shrink:0}
-.avatar.bride{background:#fef0f4;color:#c8556e}
-.avatar.groom{background:#f0f4fc;color:#4a6ea8}
+.avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-size:16px;font-weight:500;flex-shrink:0}
+.avatar.bride{background:linear-gradient(135deg,#fce8f0,#fdf0e8);color:#c8507a}
+.avatar.groom{background:linear-gradient(135deg,#e8f0fc,#e8f8fc);color:#507ac8}
 .guest-info{flex:1;min-width:0}
-.guest-name{font-size:13px;font-weight:500;color:#1a2a1e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.guest-name{font-size:13px;font-weight:500;color:#2a1f0a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rsvp-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
-.rsvp-badge{font-size:9px;font-weight:500;padding:2px 6px;border-radius:6px;flex-shrink:0}
-.rsvp-badge.yes{background:#e8f5e8;color:#3a6e3a}
-.rsvp-badge.no{background:#fce8e8;color:#c85050}
-.rsvp-badge.nr{background:#fef8e8;color:#a87e2a}
-.rsvp-badge.na{background:#f0f0ee;color:#888}
-.guest-count{font-family:"Cormorant Garamond",serif;font-size:20px;color:#e8c46e;flex-shrink:0}
-.chevron{font-size:10px;color:#c0c8c0;flex-shrink:0;transition:transform 0.2s}
+.rsvp-badge{font-size:9px;font-weight:500;padding:2px 7px;border-radius:8px;flex-shrink:0;letter-spacing:0.5px}
+.rb-yes{background:#e8f5e0;color:#3a7a3a}
+.rb-no{background:#fce8e8;color:#c85050}
+.rb-nr{background:#fef8e0;color:#a87820}
+.rb-na{background:#f0f0e8;color:#888870}
+.guest-count{font-family:"Cormorant Garamond",serif;font-size:22px;color:#c8a84e;flex-shrink:0;line-height:1}
+.chevron{font-size:10px;color:#d0c8b0;flex-shrink:0;transition:transform 0.2s}
 .chevron.open{transform:rotate(180deg)}
-.guest-expanded{padding:0 14px 14px;border-top:1px solid #f0f5f0}
+
+/* EXPANDED */
+.guest-expanded{padding:0 14px 14px;border-top:1px solid #faf4ea}
 .rsvp-section{margin-top:10px}
-.rsvp-section-title{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#6b7d6b;margin-bottom:8px}
+.rsvp-section-title{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#8a7a5a;margin-bottom:8px}
 .rsvp-options{display:flex;gap:5px}
-.rsvp-opt{flex:1;padding:7px 4px;border-radius:8px;border:1px solid #e0ece0;background:transparent;font-family:"DM Sans",sans-serif;font-size:10px;font-weight:500;cursor:pointer;text-align:center;transition:all 0.15s;color:#6b7d6b}
-.rsvp-opt.sel-yes{background:#3a6e3a;border-color:#3a6e3a;color:#fff}
-.rsvp-opt.sel-no{background:#c85050;border-color:#c85050;color:#fff}
-.rsvp-opt.sel-nr{background:#a87e2a;border-color:#a87e2a;color:#fff}
-.rsvp-opt.sel-na{background:#888;border-color:#888;color:#fff}
+.rsvp-opt{flex:1;padding:7px 4px;border-radius:8px;border:1px solid #e8d8c0;background:transparent;font-family:"DM Sans",sans-serif;font-size:10px;font-weight:500;cursor:pointer;text-align:center;transition:all 0.15s;color:#8a7a5a}
+.ro-yes{background:#3a7a3a;border-color:#3a7a3a;color:#fff}
+.ro-no{background:#c85050;border-color:#c85050;color:#fff}
+.ro-nr{background:#a87820;border-color:#a87820;color:#fff}
+.ro-na{background:#888870;border-color:#888870;color:#fff}
 .action-row{display:flex;gap:8px;margin-top:12px}
-.edit-btn{flex:1;padding:9px;border-radius:8px;background:#edf5ee;border:1px solid #c8ddc8;font-family:"DM Sans",sans-serif;font-size:11px;font-weight:500;color:#3a6e3a;cursor:pointer}
+.edit-btn{flex:1;padding:9px;border-radius:8px;background:#fdf8f0;border:1px solid #e8d8c0;font-family:"DM Sans",sans-serif;font-size:11px;font-weight:500;color:#8a7a5a;cursor:pointer}
 .delete-btn{padding:9px 14px;border-radius:8px;background:#fce8e8;border:1px solid #f0c8c8;font-family:"DM Sans",sans-serif;font-size:11px;font-weight:500;color:#c85050;cursor:pointer}
-.modal-bg{position:fixed;inset:0;background:rgba(26,42,30,0.55);z-index:200;display:flex;align-items:flex-end;justify-content:center}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(42,31,10,0.5);z-index:200;display:flex;align-items:flex-end;justify-content:center}
 .modal-bg.hidden{display:none}
-.modal{background:#fff;border-radius:20px 20px 0 0;padding:24px 20px 40px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto}
-.modal-title{font-family:"Cormorant Garamond",serif;font-size:24px;font-weight:400;color:#1a2a1e;margin-bottom:18px}
+.modal{background:#fffdf8;border-radius:20px 20px 0 0;padding:24px 20px 40px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto}
+.modal-title{font-family:"Cormorant Garamond",serif;font-size:24px;font-weight:400;color:#2a1f0a;margin-bottom:18px}
 .modal-field{margin-bottom:14px}
-.modal-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#6b7d6b;margin-bottom:6px;display:block}
-.modal-input{width:100%;padding:10px 14px;border:1px solid #c8ddc8;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:14px;color:#1a2a1e;background:#fff;outline:none}
-.modal-input:focus{border-color:#8ab58e}
-.modal-select{width:100%;padding:10px 14px;border:1px solid #c8ddc8;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:14px;color:#1a2a1e;background:#fff;outline:none}
+.modal-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8a7a5a;margin-bottom:6px;display:block}
+.modal-input{width:100%;padding:10px 14px;border:1px solid #e8d8c0;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:14px;color:#2a1f0a;background:#fff;outline:none}
+.modal-input:focus{border-color:#c8a84e}
+.modal-select{width:100%;padding:10px 14px;border:1px solid #e8d8c0;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:14px;color:#2a1f0a;background:#fff;outline:none}
 .modal-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .modal-actions{display:flex;gap:10px;margin-top:20px}
-.modal-save{flex:1;padding:14px;background:#6a9e6e;color:#fff;border:none;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
-.modal-cancel{padding:14px 20px;background:#edf5ee;border:1px solid #c8ddc8;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:12px;font-weight:500;color:#6b7d6b;cursor:pointer}
-.summary-card{background:#fff;border:1px solid #e0ece0;border-radius:12px;margin-bottom:12px;overflow:hidden}
-.summary-card-title{padding:12px 16px;font-family:"Cormorant Garamond",serif;font-size:18px;font-weight:500;background:linear-gradient(135deg,#edf5ee,#f7faf7);border-bottom:1px solid #e0ece0;color:#1a2a1e}
+.modal-save{flex:1;padding:14px;background:linear-gradient(135deg,#c8a84e,#e8c87a);color:#2a1f0a;border:none;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
+.modal-cancel{padding:14px 20px;background:#f5ede0;border:1px solid #e8d8c0;border-radius:10px;font-family:"DM Sans",sans-serif;font-size:12px;font-weight:500;color:#8a7a5a;cursor:pointer}
+
+/* SUMMARY */
+.summary-card{background:#fff;border:1px solid #f0e4cc;border-radius:14px;margin-bottom:12px;overflow:hidden}
+.summary-card-title{padding:12px 16px;font-family:"Cormorant Garamond",serif;font-size:18px;font-weight:500;background:linear-gradient(135deg,#fdf8f0,#fffdf8);border-bottom:1px solid #f0e4cc;color:#2a1f0a}
 .summary-body{padding:12px 16px}
-.summary-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #f5f8f5;font-size:13px}
+.summary-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #faf4ea}
 .summary-row:last-child{border-bottom:none}
-.summary-label{color:#6b7d6b;font-size:12px}
+.summary-label{color:#8a7a5a;font-size:12px}
 .summary-val{font-family:"Cormorant Garamond",serif;font-size:22px}
+
+/* SAVE STATUS */
 .save-status{padding:7px 20px;text-align:center;display:none}
 .save-status.show{display:block}
-.save-status.saving{background:#5a7a5c}
-.save-status.saved{background:#5a7a5c}
+.save-status.saving{background:#c8a84e}
+.save-status.saved{background:#5a8a5c}
 .save-status.error{background:#c85050}
-.save-status span{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#e8d49e}
+.save-status span{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#fff}
 </style>
 </head>
 <body>
 
 <div id="saveStatus" class="save-status"><span id="saveText"></span></div>
 
+<!-- HERO with floral SVG -->
 <div class="hero">
-  <div class="hero-inner">
+  <!-- Floral header illustration -->
+  <svg class="floral-top" viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" style="display:block">
+    <rect width="400" height="180" fill="#fffdf8"/>
+
+    <!-- ═══ LEFT BOTANICAL ARRANGEMENT ═══ -->
+    <!-- Main stems - elegant curved lines -->
+    <path d="M 70 180 Q 65 140 58 105" stroke="#8aaa78" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    <path d="M 70 180 Q 55 150 38 95" stroke="#8aaa78" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    <path d="M 70 180 Q 80 145 82 88" stroke="#8aaa78" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    <path d="M 70 180 Q 45 160 22 125" stroke="#9aba88" stroke-width="1" fill="none" stroke-linecap="round"/>
+    <path d="M 70 180 Q 95 155 105 118" stroke="#9aba88" stroke-width="1" fill="none" stroke-linecap="round"/>
+    <path d="M 70 180 Q 72 155 68 130" stroke="#8aaa78" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+
+    <!-- Elegant botanical leaves - pointed, detailed -->
+    <path d="M 52 148 Q 38 140 34 128 Q 46 132 52 148 Z" fill="#a8c898" opacity="0.85"/>
+    <path d="M 52 148 Q 50 134 56 124 Q 56 138 52 148 Z" fill="#88aa78" opacity="0.7"/>
+    <path d="M 82 142 Q 96 135 100 122 Q 88 128 82 142 Z" fill="#a8c898" opacity="0.85"/>
+    <path d="M 82 142 Q 80 128 76 118 Q 78 132 82 142 Z" fill="#88aa78" opacity="0.7"/>
+    <path d="M 40 112 Q 26 106 24 94 Q 34 100 40 112 Z" fill="#b8d4a8" opacity="0.8"/>
+    <path d="M 60 130 Q 48 128 44 118 Q 54 122 60 130 Z" fill="#a8c898" opacity="0.75"/>
+
+    <!-- Large elegant rose - left center - layered petals -->
+    <path d="M 58 104 Q 52 96 54 88 Q 60 82 66 86 Q 72 90 70 98 Q 66 106 58 104 Z" fill="#f4b8cc" opacity="0.9"/>
+    <path d="M 58 104 Q 50 98 50 90 Q 54 82 62 80 Q 70 80 72 88 Q 72 96 66 100 Q 60 104 58 104 Z" fill="none" stroke="#e898b4" stroke-width="0.7" opacity="0.8"/>
+    <path d="M 58 104 Q 54 100 54 94 Q 58 88 64 88 Q 68 90 66 96 Q 64 102 58 104 Z" fill="#f0a0bc" opacity="0.85"/>
+    <path d="M 62 98 Q 58 94 60 90 Q 64 88 66 92 Q 66 96 62 98 Z" fill="#e888a8"/>
+    <path d="M 62 94 Q 60 92 62 90 Q 64 90 64 92 Q 64 94 62 94 Z" fill="#d87098"/>
+
+    <!-- Smaller rose - upper left -->
+    <path d="M 38 94 Q 32 88 34 82 Q 38 76 44 78 Q 50 80 50 86 Q 48 94 38 94 Z" fill="#fac8d8" opacity="0.9"/>
+    <path d="M 38 94 Q 34 90 34 84 Q 38 78 44 78 Q 50 80 48 86 Q 46 92 38 94 Z" fill="none" stroke="#e8a8c0" stroke-width="0.6" opacity="0.7"/>
+    <path d="M 40 90 Q 36 86 38 82 Q 42 80 46 82 Q 48 86 44 90 Q 42 92 40 90 Z" fill="#f0b0c8" opacity="0.85"/>
+    <path d="M 42 86 Q 40 84 42 82 Q 44 82 44 84 Q 44 86 42 86 Z" fill="#e090b0"/>
+
+    <!-- Peach garden rose - right stem -->
+    <path d="M 82 86 Q 76 80 78 72 Q 82 66 88 68 Q 94 70 94 78 Q 92 86 82 86 Z" fill="#fcd8b8" opacity="0.9"/>
+    <path d="M 82 86 Q 78 82 78 74 Q 82 68 88 68 Q 94 70 92 78 Q 90 84 82 86 Z" fill="none" stroke="#e8b890" stroke-width="0.6" opacity="0.7"/>
+    <path d="M 84 82 Q 80 78 82 74 Q 86 70 90 72 Q 92 76 88 80 Q 86 84 84 82 Z" fill="#f8c8a0" opacity="0.85"/>
+    <path d="M 86 78 Q 84 76 86 73 Q 88 73 88 76 Q 88 78 86 78 Z" fill="#e8a878"/>
+
+    <!-- Elegant anemone - lower left -->
+    <path d="M 22 124 Q 18 118 20 112 Q 24 106 28 110 Q 28 108 32 110 Q 36 114 34 118 Q 32 116 28 118 Q 26 122 22 124 Z" fill="#f0d8f0" opacity="0.85"/>
+    <path d="M 26 118 Q 22 116 22 112 Q 26 108 30 110 Q 32 114 30 118 Q 28 120 26 118 Z" fill="#e0c0e8" opacity="0.8"/>
+    <circle cx="26" cy="114" r="3" fill="#7040a0" opacity="0.6"/>
+    <circle cx="26" cy="114" r="1.5" fill="#f8f0ff"/>
+
+    <!-- Delicate spray of ranunculus - right -->
+    <path d="M 105 116 Q 100 112 100 106 Q 104 100 110 102 Q 114 104 114 110 Q 112 116 105 116 Z" fill="#fef0b0" opacity="0.9"/>
+    <path d="M 105 116 Q 102 112 102 106 Q 106 100 110 102 Q 114 106 112 110 Q 110 114 105 116 Z" fill="none" stroke="#e8d060" stroke-width="0.5" opacity="0.7"/>
+    <path d="M 107 112 Q 104 110 104 106 Q 108 102 112 104 Q 112 108 109 112 Q 108 113 107 112 Z" fill="#fce898" opacity="0.85"/>
+    <circle cx="107" cy="107" r="2" fill="#d4a820"/>
+
+    <!-- Lavender sprigs -->
+    <path d="M 68 130 Q 66 120 64 108" stroke="#9888c8" stroke-width="0.8" fill="none"/>
+    <ellipse cx="64" cy="108" rx="2.5" ry="4" fill="#c8a8e8" opacity="0.85" transform="rotate(-10 64 108)"/>
+    <ellipse cx="62" cy="114" rx="2" ry="3.5" fill="#d0b8f0" opacity="0.8" transform="rotate(-15 62 114)"/>
+    <ellipse cx="66" cy="112" rx="2" ry="3" fill="#c0a0e0" opacity="0.75" transform="rotate(5 66 112)"/>
+    <ellipse cx="64" cy="118" rx="1.8" ry="3" fill="#d0b8f0" opacity="0.7" transform="rotate(-10 64 118)"/>
+
+    <!-- Fine botanical leaves scattered -->
+    <path d="M 46 76 Q 40 70 44 64 Q 50 68 46 76 Z" fill="#b0cc98" opacity="0.7"/>
+    <path d="M 72 70 Q 78 64 74 58 Q 68 62 72 70 Z" fill="#a8c490" opacity="0.7"/>
+
+    <!-- ═══ RIGHT BOTANICAL ARRANGEMENT (mirror) ═══ -->
+    <path d="M 330 180 Q 335 140 342 105" stroke="#8aaa78" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    <path d="M 330 180 Q 345 150 362 95" stroke="#8aaa78" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    <path d="M 330 180 Q 320 145 318 88" stroke="#8aaa78" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    <path d="M 330 180 Q 355 160 378 125" stroke="#9aba88" stroke-width="1" fill="none" stroke-linecap="round"/>
+    <path d="M 330 180 Q 305 155 295 118" stroke="#9aba88" stroke-width="1" fill="none" stroke-linecap="round"/>
+    <path d="M 330 180 Q 328 155 332 130" stroke="#8aaa78" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+
+    <!-- Leaves right -->
+    <path d="M 348 148 Q 362 140 366 128 Q 354 132 348 148 Z" fill="#a8c898" opacity="0.85"/>
+    <path d="M 348 148 Q 350 134 344 124 Q 344 138 348 148 Z" fill="#88aa78" opacity="0.7"/>
+    <path d="M 318 142 Q 304 135 300 122 Q 312 128 318 142 Z" fill="#a8c898" opacity="0.85"/>
+    <path d="M 318 142 Q 320 128 324 118 Q 322 132 318 142 Z" fill="#88aa78" opacity="0.7"/>
+    <path d="M 360 112 Q 374 106 376 94 Q 366 100 360 112 Z" fill="#b8d4a8" opacity="0.8"/>
+    <path d="M 340 130 Q 352 128 356 118 Q 346 122 340 130 Z" fill="#a8c898" opacity="0.75"/>
+
+    <!-- Large rose right -->
+    <path d="M 342 104 Q 348 96 346 88 Q 340 82 334 86 Q 328 90 330 98 Q 334 106 342 104 Z" fill="#f4b8cc" opacity="0.9"/>
+    <path d="M 342 104 Q 350 98 350 90 Q 346 82 338 80 Q 330 80 328 88 Q 328 96 334 100 Q 340 104 342 104 Z" fill="none" stroke="#e898b4" stroke-width="0.7" opacity="0.8"/>
+    <path d="M 342 104 Q 346 100 346 94 Q 342 88 336 88 Q 332 90 334 96 Q 336 102 342 104 Z" fill="#f0a0bc" opacity="0.85"/>
+    <path d="M 338 98 Q 342 94 340 90 Q 336 88 334 92 Q 334 96 338 98 Z" fill="#e888a8"/>
+    <path d="M 338 94 Q 340 92 338 90 Q 336 90 336 92 Q 336 94 338 94 Z" fill="#d87098"/>
+
+    <!-- Smaller rose right -->
+    <path d="M 362 94 Q 368 88 366 82 Q 362 76 356 78 Q 350 80 350 86 Q 352 94 362 94 Z" fill="#fac8d8" opacity="0.9"/>
+    <path d="M 362 94 Q 366 90 366 84 Q 362 78 356 78 Q 350 80 352 86 Q 354 92 362 94 Z" fill="none" stroke="#e8a8c0" stroke-width="0.6" opacity="0.7"/>
+    <path d="M 360 90 Q 364 86 362 82 Q 358 80 354 82 Q 352 86 356 90 Q 358 92 360 90 Z" fill="#f0b0c8" opacity="0.85"/>
+    <path d="M 358 86 Q 360 84 358 82 Q 356 82 356 84 Q 356 86 358 86 Z" fill="#e090b0"/>
+
+    <!-- Peach rose right -->
+    <path d="M 318 86 Q 324 80 322 72 Q 318 66 312 68 Q 306 70 306 78 Q 308 86 318 86 Z" fill="#fcd8b8" opacity="0.9"/>
+    <path d="M 318 86 Q 322 82 322 74 Q 318 68 312 68 Q 306 70 308 78 Q 310 84 318 86 Z" fill="none" stroke="#e8b890" stroke-width="0.6" opacity="0.7"/>
+    <path d="M 316 82 Q 320 78 318 74 Q 314 70 310 72 Q 308 76 312 80 Q 314 84 316 82 Z" fill="#f8c8a0" opacity="0.85"/>
+    <path d="M 314 78 Q 316 76 314 73 Q 312 73 312 76 Q 312 78 314 78 Z" fill="#e8a878"/>
+
+    <!-- Anemone right -->
+    <path d="M 378 124 Q 382 118 380 112 Q 376 106 372 110 Q 372 108 368 110 Q 364 114 366 118 Q 368 116 372 118 Q 374 122 378 124 Z" fill="#f0d8f0" opacity="0.85"/>
+    <path d="M 374 118 Q 378 116 378 112 Q 374 108 370 110 Q 368 114 370 118 Q 372 120 374 118 Z" fill="#e0c0e8" opacity="0.8"/>
+    <circle cx="374" cy="114" r="3" fill="#7040a0" opacity="0.6"/>
+    <circle cx="374" cy="114" r="1.5" fill="#f8f0ff"/>
+
+    <!-- Ranunculus right -->
+    <path d="M 295 116 Q 300 112 300 106 Q 296 100 290 102 Q 286 104 286 110 Q 288 116 295 116 Z" fill="#fef0b0" opacity="0.9"/>
+    <path d="M 295 116 Q 298 112 298 106 Q 294 100 290 102 Q 286 106 288 110 Q 290 114 295 116 Z" fill="none" stroke="#e8d060" stroke-width="0.5" opacity="0.7"/>
+    <path d="M 293 112 Q 296 110 296 106 Q 292 102 288 104 Q 288 108 291 112 Q 292 113 293 112 Z" fill="#fce898" opacity="0.85"/>
+    <circle cx="293" cy="107" r="2" fill="#d4a820"/>
+
+    <!-- Lavender right -->
+    <path d="M 332 130 Q 334 120 336 108" stroke="#9888c8" stroke-width="0.8" fill="none"/>
+    <ellipse cx="336" cy="108" rx="2.5" ry="4" fill="#c8a8e8" opacity="0.85" transform="rotate(10 336 108)"/>
+    <ellipse cx="338" cy="114" rx="2" ry="3.5" fill="#d0b8f0" opacity="0.8" transform="rotate(15 338 114)"/>
+    <ellipse cx="334" cy="112" rx="2" ry="3" fill="#c0a0e0" opacity="0.75" transform="rotate(-5 334 112)"/>
+    <ellipse cx="336" cy="118" rx="1.8" ry="3" fill="#d0b8f0" opacity="0.7" transform="rotate(10 336 118)"/>
+
+    <!-- Fine leaves right -->
+    <path d="M 354 76 Q 360 70 356 64 Q 350 68 354 76 Z" fill="#b0cc98" opacity="0.7"/>
+    <path d="M 328 70 Q 322 64 326 58 Q 332 62 328 70 Z" fill="#a8c490" opacity="0.7"/>
+
+    <!-- ═══ GOLD DECORATIVE CENTER ═══ -->
+    <path d="M 140 172 Q 165 168 200 170 Q 235 168 260 172" stroke="#d4a840" stroke-width="0.8" fill="none" opacity="0.5"/>
+    <path d="M 155 170 Q 175 166 200 168 Q 225 166 245 170" stroke="#e8c860" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <!-- Small center diamond motif -->
+    <path d="M 197 165 L 200 160 L 203 165 L 200 170 Z" fill="#c8a840" opacity="0.4"/>
+    <circle cx="200" cy="165" r="1.5" fill="#e8c860" opacity="0.6"/>
+    <circle cx="185" cy="168" r="1" fill="#c8a840" opacity="0.4"/>
+    <circle cx="215" cy="168" r="1" fill="#c8a840" opacity="0.4"/>
+  </svg>
+
+  <div class="hero-content">
     <div class="hero-eyebrow">June 27, 2026</div>
     <div class="hero-title">Mallory <em>&</em> Alex</div>
     <div class="hero-sub">The View at Mount Adams · Cincinnati</div>
+    <div class="countdowns">
+      <div class="countdown-block">
+        <div class="countdown-label">RSVP Deadline</div>
+        <div class="countdown-num" id="rsvpDays">—</div>
+        <div class="countdown-unit">days</div>
+      </div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#c8a84e;opacity:0.6">✿</div>
+      <div class="countdown-block">
+        <div class="countdown-label">Wedding Day</div>
+        <div class="countdown-num" id="weddingDays">—</div>
+        <div class="countdown-unit">days</div>
+      </div>
+    </div>
   </div>
 </div>
 
+<!-- STATS GRID -->
 <div class="stats-grid">
   <div class="stats-header">
     <div class="stats-header-cell"></div>
@@ -120,21 +293,21 @@ body{font-family:"DM Sans",sans-serif;background:#f7faf7;color:#1a2a1e;min-heigh
   </div>
   <div class="stats-row">
     <div class="stats-row-label">Invited</div>
-    <div class="stats-cell"><div class="stats-num invited" id="invW">—</div></div>
-    <div class="stats-cell"><div class="stats-num invited" id="invC">—</div></div>
-    <div class="stats-cell"><div class="stats-num invited" id="invR">—</div></div>
+    <div class="stats-cell"><div class="stats-num n-invited" id="invW">—</div></div>
+    <div class="stats-cell"><div class="stats-num n-invited" id="invC">—</div></div>
+    <div class="stats-cell"><div class="stats-num n-invited" id="invR">—</div></div>
   </div>
   <div class="stats-row">
     <div class="stats-row-label">Attending</div>
-    <div class="stats-cell"><div class="stats-num attending" id="attW">—</div></div>
-    <div class="stats-cell"><div class="stats-num attending" id="attC">—</div></div>
-    <div class="stats-cell"><div class="stats-num attending" id="attR">—</div></div>
+    <div class="stats-cell"><div class="stats-num n-attending" id="attW">—</div></div>
+    <div class="stats-cell"><div class="stats-num n-attending" id="attC">—</div></div>
+    <div class="stats-cell"><div class="stats-num n-attending" id="attR">—</div></div>
   </div>
   <div class="stats-row">
     <div class="stats-row-label">Pending</div>
-    <div class="stats-cell"><div class="stats-num pending" id="penW">—</div></div>
-    <div class="stats-cell"><div class="stats-num pending" id="penC">—</div></div>
-    <div class="stats-cell"><div class="stats-num pending" id="penR">—</div></div>
+    <div class="stats-cell"><div class="stats-num n-pending" id="penW">—</div></div>
+    <div class="stats-cell"><div class="stats-num n-pending" id="penC">—</div></div>
+    <div class="stats-cell"><div class="stats-num n-pending" id="penR">—</div></div>
   </div>
 </div>
 
@@ -152,9 +325,7 @@ body{font-family:"DM Sans",sans-serif;background:#f7faf7;color:#1a2a1e;min-heigh
     <div class="filter-row" id="filterRow"></div>
     <div id="guestList"></div>
   </div>
-  <div id="summaryView" style="display:none">
-    <div id="summaryContent"></div>
-  </div>
+  <div id="summaryView" style="display:none"><div id="summaryContent"></div></div>
 </div>
 
 <div class="modal-bg hidden" id="modalBg">
@@ -167,10 +338,7 @@ body{font-family:"DM Sans",sans-serif;background:#f7faf7;color:#1a2a1e;min-heigh
     <div class="modal-row">
       <div class="modal-field">
         <label class="modal-label">Side</label>
-        <select class="modal-select" id="mSide">
-          <option value="Bride">Bride</option>
-          <option value="Groom">Groom</option>
-        </select>
+        <select class="modal-select" id="mSide"><option value="Bride">Bride</option><option value="Groom">Groom</option></select>
       </div>
       <div class="modal-field">
         <label class="modal-label">Guest Count</label>
@@ -180,16 +348,11 @@ body{font-family:"DM Sans",sans-serif;background:#f7faf7;color:#1a2a1e;min-heigh
     <div class="modal-field">
       <label class="modal-label">Category</label>
       <select class="modal-select" id="mCategory">
-        <option>Bride Family (Ceremony)</option>
-        <option>Bride Extended Family</option>
-        <option>Bride Friend (Ceremony)</option>
-        <option>Bride Friend</option>
-        <option>Bride Parents Friends</option>
-        <option>Groom Family (Ceremony)</option>
-        <option>Groom Extended Family</option>
-        <option>Groom Friend (Ceremony)</option>
-        <option>Groom Friend</option>
-        <option>Groom Parents Friends</option>
+        <option>Bride Family (Ceremony)</option><option>Bride Extended Family</option>
+        <option>Bride Friend (Ceremony)</option><option>Bride Friend</option>
+        <option>Bride Parents Friends</option><option>Groom Family (Ceremony)</option>
+        <option>Groom Extended Family</option><option>Groom Friend (Ceremony)</option>
+        <option>Groom Friend</option><option>Groom Parents Friends</option>
       </select>
     </div>
     <div class="modal-field">
@@ -200,32 +363,14 @@ body{font-family:"DM Sans",sans-serif;background:#f7faf7;color:#1a2a1e;min-heigh
         <label style="display:flex;align-items:center;gap:10px;font-size:13px"><input type="checkbox" id="mReception" checked> Reception</label>
       </div>
     </div>
-    <div class="modal-field">
-      <label class="modal-label">RSVP — Welcome Party</label>
-      <select class="modal-select" id="mRsvpW">
-        <option value="NOT RECEIVED">Not Received</option>
-        <option value="YES">Yes</option>
-        <option value="NO">No</option>
-        <option value="N/A">N/A</option>
-      </select>
+    <div class="modal-field"><label class="modal-label">RSVP — Welcome Party</label>
+      <select class="modal-select" id="mRsvpW"><option value="NOT RECEIVED">Not Received</option><option value="YES">Yes</option><option value="NO">No</option><option value="N/A">N/A</option></select>
     </div>
-    <div class="modal-field">
-      <label class="modal-label">RSVP — Ceremony</label>
-      <select class="modal-select" id="mRsvpC">
-        <option value="NOT RECEIVED">Not Received</option>
-        <option value="YES">Yes</option>
-        <option value="NO">No</option>
-        <option value="N/A">N/A</option>
-      </select>
+    <div class="modal-field"><label class="modal-label">RSVP — Ceremony</label>
+      <select class="modal-select" id="mRsvpC"><option value="NOT RECEIVED">Not Received</option><option value="YES">Yes</option><option value="NO">No</option><option value="N/A">N/A</option></select>
     </div>
-    <div class="modal-field">
-      <label class="modal-label">RSVP — Reception</label>
-      <select class="modal-select" id="mRsvpR">
-        <option value="NOT RECEIVED">Not Received</option>
-        <option value="YES">Yes</option>
-        <option value="NO">No</option>
-        <option value="N/A">N/A</option>
-      </select>
+    <div class="modal-field"><label class="modal-label">RSVP — Reception</label>
+      <select class="modal-select" id="mRsvpR"><option value="NOT RECEIVED">Not Received</option><option value="YES">Yes</option><option value="NO">No</option><option value="N/A">N/A</option></select>
     </div>
     <div class="modal-actions">
       <button class="modal-cancel" onclick="closeModal()">Cancel</button>
@@ -246,7 +391,7 @@ function showStatus(msg,type){
   const el=document.getElementById('saveStatus'),tx=document.getElementById('saveText');
   el.className='save-status show '+type;
   tx.textContent=msg;
-  if(type==='saved')setTimeout(()=>el.className='save-status',2000);
+  if(type==='saved')setTimeout(()=>el.className='save-status',2500);
 }
 
 async function loadData(){
@@ -268,8 +413,7 @@ function scheduleSave(){
   saveTimer=setTimeout(async()=>{
     try{
       const r=await fetch(SUPABASE_URL+'/rest/v1/wedding?id=eq.1',{
-        method:'PATCH',
-        headers:{...SB,'Prefer':'return=minimal'},
+        method:'PATCH',headers:{...SB,'Prefer':'return=minimal'},
         body:JSON.stringify({data:JSON.stringify({guests})})
       });
       if(r.ok||r.status===204)showStatus('✓ Saved','saved');
@@ -288,19 +432,16 @@ function switchTab(tab){
 
 function rsvpClass(v){return v==='YES'?'yes':v==='NO'?'no':v==='N/A'?'na':'nr';}
 function rsvpLabel(v){return v==='YES'?'Yes':v==='NO'?'No':v==='N/A'?'N/A':'Pending';}
-function getInitial(name){return name.trim()[0].toUpperCase();}
+function getInitial(n){return n.trim()[0].toUpperCase();}
 
 function updateStats(){
-  const ev=['welcome','ceremony','reception'];
-  const rf=['rsvp_welcome','rsvp_ceremony','rsvp_reception'];
-  const ids=[['invW','invC','invR'],['attW','attC','attR'],['penW','penC','penR']];
-  ev.forEach((e,i)=>{
-    const inv=guests.reduce((s,g)=>s+(g[e]||0),0);
-    const att=guests.filter(g=>g[rf[i]]==='YES').reduce((s,g)=>s+(g[e]||0),0);
-    const pen=guests.filter(g=>g[rf[i]]==='NOT RECEIVED').reduce((s,g)=>s+(g[e]||0),0);
-    document.getElementById(ids[0][i]).textContent=inv;
-    document.getElementById(ids[1][i]).textContent=att;
-    document.getElementById(ids[2][i]).textContent=pen;
+  const evs=['welcome','ceremony','reception'];
+  const rfs=['rsvp_welcome','rsvp_ceremony','rsvp_reception'];
+  const iids=['invW','invC','invR'],aids=['attW','attC','attR'],pids=['penW','penC','penR'];
+  evs.forEach((ev,i)=>{
+    document.getElementById(iids[i]).textContent=guests.reduce((s,g)=>s+(g[ev]||0),0);
+    document.getElementById(aids[i]).textContent=guests.filter(g=>g[rfs[i]]==='YES').reduce((s,g)=>s+(g[ev]||0),0);
+    document.getElementById(pids[i]).textContent=guests.filter(g=>g[rfs[i]]==='NOT RECEIVED').reduce((s,g)=>s+(g[ev]||0),0);
   });
 }
 
@@ -308,8 +449,8 @@ function renderFilters(){
   const filters=['All','Bride','Groom','Yes','No','Pending'];
   document.getElementById('filterRow').innerHTML=filters.map(f=>{
     let cls='filter-pill'+(activeFilter===f?' active':'');
-    if(f==='Bride'&&activeFilter!=='Bride')cls+=' bride';
-    if(f==='Groom'&&activeFilter!=='Groom')cls+=' groom';
+    if(f==='Bride'&&activeFilter!=='Bride')cls+=' bride-pill';
+    if(f==='Groom'&&activeFilter!=='Groom')cls+=' groom-pill';
     return `<button class="${cls}" onclick="setFilter('${f}')">${f}</button>`;
   }).join('');
 }
@@ -327,25 +468,22 @@ function renderGuests(){
     if(activeFilter==='Pending')return g.rsvp_reception==='NOT RECEIVED';
     return true;
   });
-
   const groups={};
   filtered.forEach(g=>{if(!groups[g.category])groups[g.category]=[];groups[g.category].push(g);});
-
   let html='';
   Object.entries(groups).sort().forEach(([cat,grp])=>{
-    html+=`<div class="section-header">${cat} <span style="color:#e8c46e">(${grp.length})</span></div>`;
+    html+=`<div class="section-header">${cat} <span style="color:#c8a84e;font-size:10px">(${grp.length})</span></div>`;
     grp.forEach(g=>{
-      const isExp=expandedId===g.id;
-      const side=g.side==='Bride'?'bride':'groom';
+      const isExp=expandedId===g.id,side=g.side==='Bride'?'bride':'groom';
       html+=`<div class="guest-card${isExp?' expanded':''}">
         <div class="guest-card-head" onclick="toggleExpand(${g.id})">
           <div class="avatar ${side}">${getInitial(g.name)}</div>
           <div class="guest-info">
             <div class="guest-name">${g.name}</div>
             <div class="rsvp-row">
-              <span class="rsvp-badge ${rsvpClass(g.rsvp_welcome)}">W: ${rsvpLabel(g.rsvp_welcome)}</span>
-              <span class="rsvp-badge ${rsvpClass(g.rsvp_ceremony)}">C: ${rsvpLabel(g.rsvp_ceremony)}</span>
-              <span class="rsvp-badge ${rsvpClass(g.rsvp_reception)}">R: ${rsvpLabel(g.rsvp_reception)}</span>
+              <span class="rsvp-badge rb-${rsvpClass(g.rsvp_welcome)}">W: ${rsvpLabel(g.rsvp_welcome)}</span>
+              <span class="rsvp-badge rb-${rsvpClass(g.rsvp_ceremony)}">C: ${rsvpLabel(g.rsvp_ceremony)}</span>
+              <span class="rsvp-badge rb-${rsvpClass(g.rsvp_reception)}">R: ${rsvpLabel(g.rsvp_reception)}</span>
             </div>
           </div>
           <div class="guest-count">${g.reception||0}</div>
@@ -355,51 +493,29 @@ function renderGuests(){
           ${['welcome','ceremony','reception'].map((ev,i)=>{
             const rf=['rsvp_welcome','rsvp_ceremony','rsvp_reception'][i];
             const lbl=['Welcome Party','Ceremony','Reception'][i];
-            return `<div class="rsvp-section${i>0?' style=\"margin-top:10px\"':''}">
+            return `<div class="rsvp-section"style="${i>0?'margin-top:10px':''}">
               <div class="rsvp-section-title">${lbl} RSVP</div>
               <div class="rsvp-options">
                 ${['YES','NO','NOT RECEIVED','N/A'].map(v=>
-                  `<button class="rsvp-opt${g[rf]===v?' sel-'+rsvpClass(v):''}" onclick="updateRsvp(${g.id},'${rf}','${v}')">${rsvpLabel(v)}</button>`
+                  `<button class="rsvp-opt${g[rf]===v?' ro-'+rsvpClass(v):''}" onclick="updateRsvp(${g.id},'${rf}','${v}')">${rsvpLabel(v)}</button>`
                 ).join('')}
-              </div>
-            </div>`;
+              </div></div>`;
           }).join('')}
           <div class="action-row">
             <button class="edit-btn" onclick="openModal(${g.id})">✏️ Edit</button>
             <button class="delete-btn" onclick="deleteGuest(${g.id})">Remove</button>
-          </div>
-        </div>`:''}
+          </div></div>`:''}
       </div>`;
     });
   });
-
-  if(!html)html=`<div style="text-align:center;padding:40px;color:#6b7d6b;font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic">No guests found</div>`;
+  if(!html)html=`<div style="text-align:center;padding:40px;color:#8a7a5a;font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic">No guests found</div>`;
   document.getElementById('guestList').innerHTML=html;
   updateStats();
 }
 
-function toggleExpand(id){
-  const sy=window.scrollY;
-  expandedId=expandedId===id?null:id;
-  renderGuests();
-  window.scrollTo(0,sy);
-}
-
-function updateRsvp(id,field,val){
-  const sy=window.scrollY;
-  const g=guests.find(g=>g.id===id);
-  if(g){g[field]=val;scheduleSave();}
-  renderGuests();
-  window.scrollTo(0,sy);
-}
-
-function deleteGuest(id){
-  if(!confirm('Remove this guest?'))return;
-  guests=guests.filter(g=>g.id!==id);
-  expandedId=null;
-  scheduleSave();
-  renderGuests();
-}
+function toggleExpand(id){const sy=window.scrollY;expandedId=expandedId===id?null:id;renderGuests();window.scrollTo(0,sy);}
+function updateRsvp(id,field,val){const sy=window.scrollY;const g=guests.find(g=>g.id===id);if(g){g[field]=val;scheduleSave();}renderGuests();window.scrollTo(0,sy);}
+function deleteGuest(id){if(!confirm('Remove this guest?'))return;guests=guests.filter(g=>g.id!==id);expandedId=null;scheduleSave();renderGuests();}
 
 function openModal(id){
   editingId=id||null;
@@ -437,31 +553,21 @@ function saveGuest(){
   const name=document.getElementById('mName').value.trim();
   if(!name){alert('Please enter a name');return;}
   const count=parseInt(document.getElementById('mCount').value)||1;
-  const data={
-    name,side:document.getElementById('mSide').value,
-    category:document.getElementById('mCategory').value,
+  const data={name,side:document.getElementById('mSide').value,category:document.getElementById('mCategory').value,
     welcome:document.getElementById('mWelcome').checked?count:0,
     ceremony:document.getElementById('mCeremony').checked?count:0,
     reception:document.getElementById('mReception').checked?count:0,
     rsvp_welcome:document.getElementById('mRsvpW').value,
     rsvp_ceremony:document.getElementById('mRsvpC').value,
     rsvp_reception:document.getElementById('mRsvpR').value,
-    priority:'Invite',std:true,invite:true
-  };
-  if(editingId){
-    const idx=guests.findIndex(g=>g.id===editingId);
-    guests[idx]={...guests[idx],...data};
-  }else{
-    data.id=Date.now();
-    guests.push(data);
-  }
+    priority:'Invite',std:true,invite:true};
+  if(editingId){guests[guests.findIndex(g=>g.id===editingId)]={...guests[guests.findIndex(g=>g.id===editingId)],...data};}
+  else{data.id=Date.now();guests.push(data);}
   closeModal();scheduleSave();renderGuests();
 }
 
 function renderSummary(){
-  const evs=['welcome','ceremony','reception'];
-  const labs=['Welcome Party','Ceremony','Reception'];
-  const rfs=['rsvp_welcome','rsvp_ceremony','rsvp_reception'];
+  const evs=['welcome','ceremony','reception'],labs=['Welcome Party','Ceremony','Reception'],rfs=['rsvp_welcome','rsvp_ceremony','rsvp_reception'];
   let html='';
   html+=`<div class="summary-card"><div class="summary-card-title">Overall</div><div class="summary-body">`;
   evs.forEach((ev,i)=>{
@@ -469,10 +575,10 @@ function renderSummary(){
     const yes=guests.filter(g=>g[rfs[i]]==='YES').reduce((s,g)=>s+(g[ev]||0),0);
     const no=guests.filter(g=>g[rfs[i]]==='NO').reduce((s,g)=>s+(g[ev]||0),0);
     const pen=guests.filter(g=>g[rfs[i]]==='NOT RECEIVED').reduce((s,g)=>s+(g[ev]||0),0);
-    html+=`<div class="summary-row"><span class="summary-label">${labs[i]} — Invited</span><span class="summary-val" style="color:#5a7a5c">${inv}</span></div>`;
-    html+=`<div class="summary-row"><span class="summary-label">${labs[i]} — Attending</span><span class="summary-val" style="color:#3a6e3a">${yes}</span></div>`;
+    html+=`<div class="summary-row"><span class="summary-label">${labs[i]} — Invited</span><span class="summary-val" style="color:#5a8a5c">${inv}</span></div>`;
+    html+=`<div class="summary-row"><span class="summary-label">${labs[i]} — Attending</span><span class="summary-val" style="color:#3a7a3a">${yes}</span></div>`;
     html+=`<div class="summary-row"><span class="summary-label">${labs[i]} — Declined</span><span class="summary-val" style="color:#c85050">${no}</span></div>`;
-    html+=`<div class="summary-row"><span class="summary-label">${labs[i]} — Pending</span><span class="summary-val" style="color:#a87e2a">${pen}</span></div>`;
+    html+=`<div class="summary-row"><span class="summary-label">${labs[i]} — Pending</span><span class="summary-val" style="color:#a87820">${pen}</span></div>`;
   });
   html+='</div></div>';
   ['Bride','Groom'].forEach(side=>{
@@ -481,7 +587,7 @@ function renderSummary(){
     evs.forEach((ev,i)=>{
       const inv=sg.reduce((s,g)=>s+(g[ev]||0),0);
       const yes=sg.filter(g=>g[rfs[i]]==='YES').reduce((s,g)=>s+(g[ev]||0),0);
-      html+=`<div class="summary-row"><span class="summary-label">${labs[i]}</span><span class="summary-val" style="color:#5a7a5c">${yes} / ${inv}</span></div>`;
+      html+=`<div class="summary-row"><span class="summary-label">${labs[i]}</span><span class="summary-val" style="color:#5a8a5c">${yes} / ${inv}</span></div>`;
     });
     html+='</div></div>';
   });
@@ -489,9 +595,14 @@ function renderSummary(){
 }
 
 async function init(){
-  await loadData();
-  renderFilters();
-  renderGuests();
+  // Countdowns
+  const now = new Date();
+  const today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+  const rsvp = Date.UTC(2026, 5, 1);
+  const wedding = Date.UTC(2026, 5, 27);
+  document.getElementById('rsvpDays').textContent = Math.max(0, Math.round((rsvp - today) / 86400000));
+  document.getElementById('weddingDays').textContent = Math.max(0, Math.round((wedding - today) / 86400000));
+  await loadData();renderFilters();renderGuests();
 }
 init();
 </script>
