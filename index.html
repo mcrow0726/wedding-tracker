@@ -362,7 +362,12 @@ async function loadData(){
     const r=await fetch(SHEET_SCRIPT+'?t='+Date.now());
     const data=await r.json();
     if(Array.isArray(data)&&data.length>0){
-      guests=data;
+      // Normalize all RSVP values to uppercase
+      guests=data.map(g=>({...g,
+        rsvp_welcome:(g.rsvp_welcome||'NOT RECEIVED').toString().toUpperCase().trim(),
+        rsvp_ceremony:(g.rsvp_ceremony||'NOT RECEIVED').toString().toUpperCase().trim(),
+        rsvp_reception:(g.rsvp_reception||'NOT RECEIVED').toString().toUpperCase().trim(),
+      }));
       showStatus('✓ Loaded','saved');
       return;
     }
@@ -381,8 +386,8 @@ function switchTab(tab){
   if(tab==='summary')renderSummary();
 }
 
-function rsvpClass(v){return v==='YES'?'yes':v==='NO'?'no':v==='N/A'?'na':'nr';}
-function rsvpLabel(v){return v==='YES'?'Yes':v==='NO'?'No':v==='N/A'?'N/A':'Pending';}
+function rsvpClass(v){const u=(v||'').toUpperCase().trim();return u==='YES'?'yes':u==='NO'?'no':u==='N/A'?'na':'nr';}
+function rsvpLabel(v){const u=(v||'').toUpperCase().trim();return u==='YES'?'Yes':u==='NO'?'No':u==='N/A'?'N/A':'Pending';}
 function getInitial(n){return n.trim()[0].toUpperCase();}
 
 function updateStats(){
